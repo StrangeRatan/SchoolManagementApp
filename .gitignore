@@ -34,4 +34,3 @@ build/
 
 # Application properties (keep secrets local)
 src/main/resources/application.properties
-src/main/resources/application.yml

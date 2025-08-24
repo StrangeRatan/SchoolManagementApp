@@ -18,6 +18,7 @@ public class EnrollmentEntityDto {
 
     private CourseEntity course;          // Many-to-One
 
+
     private LocalDate enrollmentDate;
 
     private String grade;

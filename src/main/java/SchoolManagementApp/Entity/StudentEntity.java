@@ -1,5 +1,6 @@
 package SchoolManagementApp.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -28,7 +29,13 @@ public class StudentEntity {
 
     private String address;
 
+
     private LocalDate enrollmentDate;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    @JsonBackReference
+    private UserEntity user;
 
     public Long getId() {
         return id;
@@ -100,5 +107,13 @@ public class StudentEntity {
 
     public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

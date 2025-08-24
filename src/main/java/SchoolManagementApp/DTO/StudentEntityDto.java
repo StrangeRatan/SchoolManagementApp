@@ -1,6 +1,8 @@
 package SchoolManagementApp.DTO;
 
 
+
+
 import java.time.LocalDate;
 
 
@@ -8,6 +10,8 @@ public class StudentEntityDto {
 
 
     private Long id;
+
+    private String username;
 
     private String firstName;
 
@@ -25,7 +29,22 @@ public class StudentEntityDto {
 
     private String address;
 
+
     private LocalDate enrollmentDate;
+
+
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
 
     public Long getId() {
         return id;

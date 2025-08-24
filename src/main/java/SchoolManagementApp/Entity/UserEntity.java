@@ -1,22 +1,38 @@
 package SchoolManagementApp.Entity;
 
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+
 
 @Entity
 @Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private  Long id;
 
     @Column(unique = true, nullable = false)
-    String username;
+    private  String username;
 
     @Column(nullable = false)
-    String password;
+    private String password;
 
     String role;
+
+    @OneToOne(mappedBy = "user" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private  StudentEntity studentinformation;
+
+    public StudentEntity getStudentinformation() {
+        return studentinformation;
+    }
+
+    public void setStudentinformation(StudentEntity studentinformation) {
+        this.studentinformation = studentinformation;
+    }
 
     public Long getId() {
         return id;
@@ -49,4 +65,6 @@ public class UserEntity {
     public void setRole(String role) {
         this.role = role;
     }
+
+
 }

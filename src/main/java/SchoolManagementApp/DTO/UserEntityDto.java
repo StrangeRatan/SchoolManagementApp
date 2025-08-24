@@ -1,23 +1,19 @@
 package SchoolManagementApp.DTO;
 
 
+import SchoolManagementApp.Entity.StudentEntity;
+
+
 public class UserEntityDto {
 
     private Long id;
 
-
     private String username;
-
 
     private String role;
 
-    public Long getId() {
-        return id;
-    }
+    private StudentEntity studentinformation;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -25,6 +21,24 @@ public class UserEntityDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public StudentEntity getStudentinformation() {
+        return studentinformation;
+    }
+
+    public void setStudentinformation(StudentEntity studentinformation) {
+        this.studentinformation = studentinformation;
+    }
+
+    public Long getId() {
+        return id;
+
+
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 
@@ -35,4 +49,6 @@ public class UserEntityDto {
     public void setRole(String role) {
         this.role = role;
     }
+
+
 }

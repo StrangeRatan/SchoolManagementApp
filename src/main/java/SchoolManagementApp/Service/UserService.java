@@ -37,6 +37,7 @@ public class UserService {
             userEntityDto.setId(user.getId());
             userEntityDto.setUsername(user.getUsername());
             userEntityDto.setRole(user.getRole());
+            userEntityDto.setStudentinformation(user.getStudentinformation());
             alluser.add(userEntityDto);
         }
         return alluser;

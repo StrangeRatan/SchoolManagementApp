@@ -1,6 +1,6 @@
 package SchoolManagementApp.Controller;
 
-import SchoolManagementApp.DTO.UserEntityDtoSignup;
+
 import SchoolManagementApp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

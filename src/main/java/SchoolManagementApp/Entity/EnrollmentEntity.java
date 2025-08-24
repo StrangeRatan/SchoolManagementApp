@@ -10,19 +10,19 @@ public class EnrollmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
-    StudentEntity student;        // Many-to-One
+    private StudentEntity student;        // Many-to-One
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
-    CourseEntity course;          // Many-to-One
+    private CourseEntity course;          // Many-to-One
 
-    LocalDate enrollmentDate;
+    private LocalDate enrollmentDate;
 
-    String grade;
+    private String grade;
 
     public String getGrade() {
         return grade;

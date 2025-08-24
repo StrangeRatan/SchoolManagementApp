@@ -4,13 +4,13 @@ package SchoolManagementApp.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     String username;
 
     @Column(nullable = false)

@@ -3,7 +3,7 @@ package SchoolManagementApp.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="teachers")
+@Table(name = "teachers")
 public class TeacherEntity {
 
     @Id

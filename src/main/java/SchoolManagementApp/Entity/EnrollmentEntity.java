@@ -1,35 +1,54 @@
 package SchoolManagementApp.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "enrollments")
+@Table(name = "enrollments", uniqueConstraints = {@UniqueConstraint(columnNames = {"student_id", "course_name"})})
 public class EnrollmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private StudentEntity student;        // Many-to-One
+    @Column(name = "course_name", nullable = false)
+    private String course;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
-    private CourseEntity course;          // Many-to-One
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    @JsonBackReference
+    private UserEntity user;
 
     private LocalDate enrollmentDate;
 
     private String grade;
 
-    public String getGrade() {
-        return grade;
+    public String getCourse() {
+        return course;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public LocalDate getEnrollmentDate() {
@@ -40,27 +59,11 @@ public class EnrollmentEntity {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public CourseEntity getCourse() {
-        return course;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setCourse(CourseEntity course) {
-        this.course = course;
-    }
-
-    public StudentEntity getStudent() {
-        return student;
-    }
-
-    public void setStudent(StudentEntity student) {
-        this.student = student;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

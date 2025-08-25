@@ -1,7 +1,10 @@
 package SchoolManagementApp.DTO;
 
-import SchoolManagementApp.Entity.CourseEntity;
+
 import SchoolManagementApp.Entity.StudentEntity;
+import SchoolManagementApp.Entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 
 import java.time.LocalDate;
@@ -9,27 +12,40 @@ import java.time.LocalDate;
 
 public class EnrollmentEntityDto {
 
-
     private Long id;
 
+    private String course;
 
-    private StudentEntity student;        // Many-to-One
 
-
-    private CourseEntity course;          // Many-to-One
-
+//    private UserEntity user;
 
     private LocalDate enrollmentDate;
 
     private String grade;
 
-    public String getGrade() {
-        return grade;
+    public Long getId() {
+        return id;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setId(Long id) {
+        this.id = id;
     }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+//    public UserEntity getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(UserEntity user) {
+//        this.user = user;
+//    }
 
     public LocalDate getEnrollmentDate() {
         return enrollmentDate;
@@ -39,27 +55,11 @@ public class EnrollmentEntityDto {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public CourseEntity getCourse() {
-        return course;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setCourse(CourseEntity course) {
-        this.course = course;
-    }
-
-    public StudentEntity getStudent() {
-        return student;
-    }
-
-    public void setStudent(StudentEntity student) {
-        this.student = student;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

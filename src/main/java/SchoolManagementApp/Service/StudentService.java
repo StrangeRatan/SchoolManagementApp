@@ -78,5 +78,50 @@ public class StudentService {
 
             throw new RuntimeException(e);
         }
+
+
+    }
+
+    public void updateProfile(StudentEntityDto profile, String username) {
+        try {
+            UserEntity user = userEntityRepository.findByUsername(username);
+
+            if (user != null) {
+
+                StudentEntity student = user.getStudentinformation();
+
+                if (profile.getFirstName() != null) student.setFirstName(profile.getFirstName());
+                if (profile.getLastName() != null) student.setLastName(profile.getLastName());
+                if (profile.getEmail() != null) student.setEmail(profile.getEmail());
+                if (profile.getPhone() != null) student.setPhone(profile.getPhone());
+                if (profile.getDob() != null) student.setDob(profile.getDob());
+                if (profile.getGender() != null) student.setGender(profile.getGender());
+                if (profile.getAddress() != null) student.setAddress(profile.getAddress());
+                studentRepository.save(student);
+
+
+            } else {
+                throw new RuntimeException("User not found: " + username);
+            }
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public void deleteprofile(String username) {
+        try {
+            UserEntity user = userEntityRepository.findByUsername(username);
+            if (user != null) {
+                Long id = user.getStudentinformation().getId();
+                user.setStudentinformation(null);
+                studentRepository.deleteById(id);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

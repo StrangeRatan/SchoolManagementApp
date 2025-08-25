@@ -1,9 +1,12 @@
 package SchoolManagementApp.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -36,6 +39,7 @@ public class StudentEntity {
     @JoinColumn(name="user_id")
     @JsonBackReference
     private UserEntity user;
+
 
     public Long getId() {
         return id;

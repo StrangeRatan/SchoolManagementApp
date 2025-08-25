@@ -1,7 +1,11 @@
 package SchoolManagementApp.DTO;
 
 
+import SchoolManagementApp.Entity.EnrollmentEntity;
 import SchoolManagementApp.Entity.StudentEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserEntityDto {
@@ -13,6 +17,16 @@ public class UserEntityDto {
     private String role;
 
     private StudentEntity studentinformation;
+
+    public List<EnrollmentEntity> getEnrollment() {
+        return enrollment;
+    }
+
+    public void setEnrollment(List<EnrollmentEntity> enrollment) {
+        this.enrollment = enrollment;
+    }
+
+    private List<EnrollmentEntity> enrollment = new ArrayList<>();
 
 
     public String getUsername() {

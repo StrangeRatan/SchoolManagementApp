@@ -1,10 +1,11 @@
 package SchoolManagementApp.Entity;
 
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -12,19 +13,24 @@ import jakarta.persistence.*;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
-    private  String username;
+    private String username;
 
     @Column(nullable = false)
     private String password;
 
     String role;
 
-    @OneToOne(mappedBy = "user" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private  StudentEntity studentinformation;
+    private StudentEntity studentinformation;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<EnrollmentEntity> enrollment = new ArrayList<>();
+
 
     public StudentEntity getStudentinformation() {
         return studentinformation;
@@ -66,5 +72,11 @@ public class UserEntity {
         this.role = role;
     }
 
+    public List<EnrollmentEntity> getEnrollment() {
+        return enrollment;
+    }
 
+    public void setEnrollment(List<EnrollmentEntity> enrollment) {
+        this.enrollment = enrollment;
+    }
 }

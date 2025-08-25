@@ -7,6 +7,8 @@ import SchoolManagementApp.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +24,11 @@ public class StudentController {
     EnrollmentService enrollmentService;
 
 
-    @GetMapping("/student-details/{username}")
-    public ResponseEntity<?> getStudentDetails(@PathVariable String username) {
+    @GetMapping("/student-details")
+    public ResponseEntity<?> getStudentDetails() {
         try {
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
             StudentEntityDto allDetails = studentService.getAllDetails(username);
             return new ResponseEntity<>(allDetails, HttpStatus.FOUND);
 
@@ -34,9 +38,11 @@ public class StudentController {
 
     }
 
-    @PostMapping("/create-profile/{username}")
-    public ResponseEntity<?> createProfile(@RequestBody StudentEntityDto profile, @PathVariable String username) {
+    @PostMapping("/create-profile")
+    public ResponseEntity<?> createProfile(@RequestBody StudentEntityDto profile) {
         try {
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
             studentService.createProfile(profile, username);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
@@ -45,9 +51,11 @@ public class StudentController {
         }
     }
 
-    @PutMapping("/update-profile/{username}")
-    public ResponseEntity<?> updateProfile(@RequestBody StudentEntityDto profile, @PathVariable String username) {
+    @PutMapping("/update-profile")
+    public ResponseEntity<?> updateProfile(@RequestBody StudentEntityDto profile) {
         try {
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
             studentService.updateProfile(profile, username);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -56,9 +64,11 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("/delete-profile/{username}")
-    public ResponseEntity<?> deleteProfile(@PathVariable String username) {
+    @DeleteMapping("/delete-profile")
+    public ResponseEntity<?> deleteProfile() {
         try {
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
             studentService.deleteprofile(username);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -67,9 +77,11 @@ public class StudentController {
 
     }
 
-    @GetMapping("/enrollment-details/{username}")
-    public ResponseEntity<?> subjectEnrollment(@PathVariable String username) {
+    @GetMapping("/enrollment-details")
+    public ResponseEntity<?> subjectEnrollment() {
         try {
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
             List<EnrollmentEntityDto> allEnrollment = enrollmentService.getAllEnrollment(username);
             return new ResponseEntity<>(allEnrollment, HttpStatus.FOUND);
 
@@ -79,9 +91,11 @@ public class StudentController {
 
     }
 
-    @PostMapping("/enrollment-info/{username}")
-    public ResponseEntity<?> createProfile(@RequestBody EnrollmentEntityDto enrollSubject, @PathVariable String username) {
+    @PostMapping("/enrollment-info")
+    public ResponseEntity<?> createProfile(@RequestBody EnrollmentEntityDto enrollSubject) {
         try {
+            Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName();
             enrollmentService.enrollemtEntry(enrollSubject, username);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {

@@ -7,6 +7,7 @@ import SchoolManagementApp.ExternalApiAdd.BookApi.BookService;
 import SchoolManagementApp.ExternalApiAdd.WeatherApi.WeatherService;
 import SchoolManagementApp.ExternalApiAdd.WeatherApi.weatherDto;
 import SchoolManagementApp.Service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,10 +45,14 @@ public class publicContoller {
     }
 
     @PostMapping("/create-users")
-    public ResponseEntity<?> createUser(@RequestBody UserEntityDtoSignup newUser) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserEntityDtoSignup newUser) {
         userService.createUser(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+
+
+
 
 
 }

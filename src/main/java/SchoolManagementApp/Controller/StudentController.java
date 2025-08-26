@@ -4,7 +4,9 @@ import SchoolManagementApp.DTO.EnrollmentEntityDto;
 import SchoolManagementApp.DTO.StudentEntityDto;
 import SchoolManagementApp.Service.EnrollmentService;
 import SchoolManagementApp.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -39,7 +41,7 @@ public class StudentController {
     }
 
     @PostMapping("/create-profile")
-    public ResponseEntity<?> createProfile(@RequestBody StudentEntityDto profile) {
+    public ResponseEntity<?> createProfile(@Valid @RequestBody StudentEntityDto profile) {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
@@ -52,7 +54,7 @@ public class StudentController {
     }
 
     @PutMapping("/update-profile")
-    public ResponseEntity<?> updateProfile(@RequestBody StudentEntityDto profile) {
+    public ResponseEntity<?> updateProfile( @RequestBody StudentEntityDto profile) {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();

@@ -1,12 +1,17 @@
 package SchoolManagementApp.DTO;
 
 
+import jakarta.validation.constraints.NotBlank;
+
+
+
 public class UserEntityDtoSignup {
 
 
-
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
 
 

@@ -8,6 +8,7 @@ import SchoolManagementApp.Repository.StudentRepository;
 import SchoolManagementApp.Repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -47,7 +48,7 @@ public class StudentService {
 
 
     }
-
+    @Transactional
     public void createProfile(StudentEntityDto profile, String username) {
         try {
             UserEntity user = userEntityRepository.findByUsername(username);
@@ -82,6 +83,7 @@ public class StudentService {
 
     }
 
+    @Transactional
     public void updateProfile(StudentEntityDto profile, String username) {
         try {
             UserEntity user = userEntityRepository.findByUsername(username);

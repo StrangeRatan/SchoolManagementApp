@@ -3,6 +3,11 @@ package SchoolManagementApp.DTO;
 
 
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 import java.time.LocalDate;
 
 
@@ -11,22 +16,30 @@ public class StudentEntityDto {
 
     private Long id;
 
+
     private String username;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
 
-
+    @NotBlank
+    @Email
     private String email;
 
-
+    @NotBlank
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
     private String phone;
+
 
     private LocalDate dob;
 
+    @NotBlank
     private String gender;
 
+    @NotBlank
     private String address;
 
 

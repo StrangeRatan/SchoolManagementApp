@@ -1,6 +1,8 @@
 package SchoolManagementApp.Configuration;
 
+import SchoolManagementApp.Filter.jwtfilter;
 import SchoolManagementApp.Service.UserDetailServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,6 +26,9 @@ public class SpringConfiguration {
     public SpringConfiguration(UserDetailServiceImp userDetailServiceImp) {
         this.userDetailServiceImp = userDetailServiceImp;
     }
+
+    @Autowired
+    private jwtfilter jwtFilter;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
@@ -38,12 +44,15 @@ public class SpringConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.authorizeHttpRequests(requset -> requset
                 .requestMatchers("/public/**").permitAll()
+                .requestMatchers("/publicJWT/**").permitAll()
                 .requestMatchers("/student/**").authenticated()
                 .requestMatchers("/Admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults()) use of basic auth uerid and password
                 .csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+
 
 
     }

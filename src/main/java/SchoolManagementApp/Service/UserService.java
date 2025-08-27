@@ -53,7 +53,7 @@ public class UserService {
 
         for (UserEntity user : all) {
             UserEntityDto userEntityDto = new UserEntityDto();
-            userEntityDto.setId(user.getId());
+
             userEntityDto.setUsername(user.getUsername());
             userEntityDto.setRole(user.getRole());
             userEntityDto.setStudentinformation(user.getStudentinformation());

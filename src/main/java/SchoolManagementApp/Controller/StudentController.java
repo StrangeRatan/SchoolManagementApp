@@ -1,9 +1,12 @@
 package SchoolManagementApp.Controller;
 
 import SchoolManagementApp.DTO.EnrollmentEntityDto;
+import SchoolManagementApp.DTO.EnrollmentEntityDtoEnroll;
 import SchoolManagementApp.DTO.StudentEntityDto;
 import SchoolManagementApp.Service.EnrollmentService;
 import SchoolManagementApp.Service.StudentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
+@Tag(name="Student-APIs", description = "Check Student our Profile, CREATE, UPDATE and DELETE profile")
 public class StudentController {
 
     @Autowired
@@ -26,7 +30,8 @@ public class StudentController {
     EnrollmentService enrollmentService;
 
 
-    @GetMapping("/student-details")
+    @GetMapping("/student-information")
+    @Operation(summary = "This endpoint show all date related student")
     public ResponseEntity<?> getStudentDetails() {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
@@ -41,6 +46,7 @@ public class StudentController {
     }
 
     @PostMapping("/create-profile")
+    @Operation(summary = "this endpoint user create our profile")
     public ResponseEntity<?> createProfile(@Valid @RequestBody StudentEntityDto profile) {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
@@ -54,6 +60,7 @@ public class StudentController {
     }
 
     @PutMapping("/update-profile")
+    @Operation(summary = "This endpoint user update there profile")
     public ResponseEntity<?> updateProfile( @RequestBody StudentEntityDto profile) {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
@@ -67,6 +74,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/delete-profile")
+    @Operation(summary = "This endpoint user delete our profile")
     public ResponseEntity<?> deleteProfile() {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
@@ -79,13 +87,14 @@ public class StudentController {
 
     }
 
-    @GetMapping("/enrollment-details")
+    @GetMapping("/enrollment-information")
+    @Operation(summary = "This endpoint show  user enroll all subject or courses")
     public ResponseEntity<?> subjectEnrollment() {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();
             List<EnrollmentEntityDto> allEnrollment = enrollmentService.getAllEnrollment(username);
-            return new ResponseEntity<>(allEnrollment, HttpStatus.FOUND);
+            return new ResponseEntity<>(allEnrollment, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -93,8 +102,9 @@ public class StudentController {
 
     }
 
-    @PostMapping("/enrollment-info")
-    public ResponseEntity<?> createProfile(@RequestBody EnrollmentEntityDto enrollSubject) {
+    @PostMapping("/enroll-subject")
+    @Operation(summary = "This endpoint user enroll subject or course")
+    public ResponseEntity<?> createProfile(@RequestBody EnrollmentEntityDtoEnroll enrollSubject) {
         try {
             Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
             String username = authentication.getName();

@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @EnableWebSecurity
 public class SpringConfiguration {
 
-  public final UserDetailServiceImp userDetailServiceImp;
+    public final UserDetailServiceImp userDetailServiceImp;
 
     public SpringConfiguration(UserDetailServiceImp userDetailServiceImp) {
         this.userDetailServiceImp = userDetailServiceImp;
@@ -41,18 +41,22 @@ public class SpringConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(requset -> requset
-                .requestMatchers("/public/**").permitAll()
-                .requestMatchers("/publicJWT/**").permitAll()
-                .requestMatchers("/student/**").authenticated()
-                .requestMatchers("/Admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated())
+                        .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/publicJWT/**").permitAll()
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
+                        .requestMatchers("/student/**").authenticated()
+                        .requestMatchers("/Admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated())
 //                .httpBasic(Customizer.withDefaults()) use of basic auth uerid and password
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
 
 
     }

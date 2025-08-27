@@ -28,7 +28,7 @@ public class StudentService {
             if (user != null) {
                 StudentEntity studentEntity = user.getStudentinformation();
                 StudentEntityDto userdto = new StudentEntityDto();
-                userdto.setId(studentEntity.getId());
+
                 userdto.setUsername(user.getUsername());
                 userdto.setFirstName(studentEntity.getFirstName());
                 userdto.setLastName(studentEntity.getLastName());

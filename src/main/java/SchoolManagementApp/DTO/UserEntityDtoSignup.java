@@ -15,7 +15,7 @@ public class UserEntityDtoSignup {
     private String password;
 
 
-    private String role;
+
 
 
 
@@ -28,13 +28,7 @@ public class UserEntityDtoSignup {
     }
 
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getPassword() {
         return password;
@@ -49,7 +43,7 @@ public class UserEntityDtoSignup {
         return "UserEntityDtoSignup{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+
                 '}';
     }
 }

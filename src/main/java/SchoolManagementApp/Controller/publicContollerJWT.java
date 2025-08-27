@@ -8,6 +8,8 @@ import SchoolManagementApp.ExternalApiAdd.WeatherApi.weatherDto;
 import SchoolManagementApp.Service.UserDetailServiceImp;
 import SchoolManagementApp.Service.UserService;
 import SchoolManagementApp.Util.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/publicJWT")
+@Tag(name="Public APIs", description = "Check API working, Check BOOKs, SIGNUP and LOGIN then get TOKEN for uses endpoint")
 public class publicContollerJWT {
 
     @Autowired
@@ -44,6 +47,7 @@ public class publicContollerJWT {
     private JwtUtil jwtUtil;
 
     @GetMapping("/health-check")
+    @Operation(summary = "This endpoint check APIs working")
     public ResponseEntity<?> checkHealthCheck() {
         weatherDto weatherResponse = weatherService.getWeather("Varanasi");
         String greeting = "";
@@ -54,17 +58,20 @@ public class publicContollerJWT {
     }
 
     @GetMapping("/book/{title}")
+    @Operation(summary = "This endpoint check available books")
     public List<BookDto> searchBooks(@PathVariable String title) {
         return bookService.searchBooks(title);
     }
 
     @PostMapping("/signup")
+    @Operation(summary = "This endpoint first time user can signup and set username and password")
     public ResponseEntity<?> signup(@Valid @RequestBody UserEntityDtoSignup newUser) {
         userService.createUser(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
+    @Operation(summary = "This endpoint enter username and password then get login token that token use in Student Apis endpont")
     public ResponseEntity<?> login(@Valid @RequestBody UserEntityDtoSignup user) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));

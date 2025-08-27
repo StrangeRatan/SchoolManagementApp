@@ -1,6 +1,7 @@
 package SchoolManagementApp.Service;
 
 import SchoolManagementApp.DTO.EnrollmentEntityDto;
+import SchoolManagementApp.DTO.EnrollmentEntityDtoEnroll;
 import SchoolManagementApp.Entity.EnrollmentEntity;
 import SchoolManagementApp.Entity.UserEntity;
 import SchoolManagementApp.Repository.EnrollmentRepository;
@@ -46,7 +47,7 @@ public class EnrollmentService {
         }
     }
 
-    public void enrollemtEntry(EnrollmentEntityDto enrollmentEntityDto, String username) {
+    public void enrollemtEntry(EnrollmentEntityDtoEnroll enrollmentEntityDto, String username) {
         try {
             UserEntity user = userEntityRepository.findByUsername(username);
             if (user != null) {

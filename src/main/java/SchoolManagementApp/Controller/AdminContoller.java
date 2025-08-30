@@ -11,27 +11,32 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Admin")
-@Tag(name = "Admin APIs", description = "Admin can check all users, DELETE user")
+@Tag(name = "Admin APIs", description = "Admin can check all users and delete users")
 public class AdminContoller {
 
     @Autowired
     UserService userService;
 
     @GetMapping("/get-All-users")
-    @Operation(summary = "This endpoint used of Admin user only he can check all users")
+    @Operation(summary = "Get a list of all users (Admin only)")
     public ResponseEntity<?> getAllUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+
+        }catch (Exception e){
+            return new ResponseEntity<>("Failed to fetch users: " + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 
     @DeleteMapping("/delete-userbyName/{username}")
-    @Operation(summary = "This endpoint used of Admin user only, and delete user by there username")
+    @Operation(summary = "Delete a user by username (Admin only)")
     public ResponseEntity<?> deleteUserByName(@PathVariable String username) {
         try {
             userService.deleteUser(username);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("User deleted successfully",HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("User not found: " + username,HttpStatus.NOT_FOUND);
         }
     }
 

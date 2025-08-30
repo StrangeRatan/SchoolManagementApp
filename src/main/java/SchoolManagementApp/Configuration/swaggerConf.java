@@ -21,9 +21,9 @@ public class swaggerConf {
         return new OpenAPI().info(new Info().title("STUDENT-MANAGEMENT-APP")
                 .description("DEVELOPED BY RATAN").version("1.0"))
                 .tags(Arrays.asList(
-                        new Tag().name("Public APIs"),
-                        new Tag().name("Student-APIs"),
-                        new Tag().name("Admin APIs")
+                        new Tag().name("Public APIs").description("APIs accessible without authentication"),
+                        new Tag().name("Student-APIs").description("Student-related operations"),
+                        new Tag().name("Admin APIs").description("Admin-only operations")
                 ))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components().addSecuritySchemes(

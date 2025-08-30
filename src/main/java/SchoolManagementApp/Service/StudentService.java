@@ -2,6 +2,7 @@ package SchoolManagementApp.Service;
 
 import SchoolManagementApp.DTO.StudentEntityDto;
 
+import SchoolManagementApp.DTO.StudentEntityDtoshowInfo;
 import SchoolManagementApp.Entity.StudentEntity;
 import SchoolManagementApp.Entity.UserEntity;
 import SchoolManagementApp.Repository.StudentRepository;
@@ -21,13 +22,13 @@ public class StudentService {
     @Autowired
     UserEntityRepository userEntityRepository;
 
-    public StudentEntityDto getAllDetails(String username) {
+    public StudentEntityDtoshowInfo getAllDetails(String username) {
         try {
             UserEntity user = userEntityRepository.findByUsername(username);
 
             if (user != null) {
                 StudentEntity studentEntity = user.getStudentinformation();
-                StudentEntityDto userdto = new StudentEntityDto();
+                StudentEntityDtoshowInfo userdto = new StudentEntityDtoshowInfo();
 
                 userdto.setUsername(user.getUsername());
                 userdto.setFirstName(studentEntity.getFirstName());

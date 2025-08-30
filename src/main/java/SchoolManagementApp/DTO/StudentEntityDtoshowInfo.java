@@ -1,6 +1,8 @@
 package SchoolManagementApp.DTO;
 
 
+
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -8,31 +10,52 @@ import jakarta.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 
-public class StudentEntityDto {
+public class StudentEntityDtoshowInfo {
 
 
-    @NotBlank
+
+
+
+    private String username;
+
+
     private String firstName;
 
-    @NotBlank
+
     private String lastName;
 
-    @NotBlank
-    @Email
+
     private String email;
 
-    @NotBlank
-    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
+
     private String phone;
 
 
     private LocalDate dob;
 
-    @NotBlank
+
     private String gender;
 
-    @NotBlank
+
     private String address;
+
+
+    private LocalDate enrollmentDate;
+
+
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+
 
 
     public String getFirstName() {
@@ -91,4 +114,11 @@ public class StudentEntityDto {
         this.address = address;
     }
 
+    public LocalDate getEnrollmentDate() {
+        return enrollmentDate;
+    }
+
+    public void setEnrollmentDate(LocalDate enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
+    }
 }
